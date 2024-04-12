@@ -1,50 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "binary_trees.h"
 
-/* Define the structure for a binary tree */
-typedef struct TreeNode {
-	int data;
-	struct TreeNode* left;
-	struct TreeNode* right;
-} TreeNode;
+/**
+ * binary_tree_node - Write a function that creates a binary tree
+ * @parent: this pointer parent binary trees
+ * @value: this value new
+ * Return: new node
+ */
+binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
+{
+	binary_tree_t *new_node;
 
-/* Function to create a new binary tree */
-TreeNode* createNode(int data) {
-	/* Allocate memory for a new node */
-	TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
+	if (value == '\0')
+		return (NULL);
 
-	/*  Check if memory allocation */
-	if (newNode == NULL) {
-		printf("Memory allocation failed.\n");
-		exit(1);
-		/* Exit program if memory allocation failed */
-	}
+	new_node = malloc(sizeof(binary_tree_t));
+	if (new_node == NULL)
+		return (NULL);
 
-	/* Initialize the node with given data */
-	newNode->data = data;
-	newNode->left = NULL;
-	newNode->right = NULL;
+	new_node->n = value;
+	new_node->parent = parent;
+	new_node->left = NULL;
+	new_node->right = NULL;
 
-	/* Return the newly created node */
-	return newNode;
-}
-
-int main() {
-	/* Usage of createNode function */
-	TreeNode* root = createNode(5);
-	root->left = createNode(3);
-	root->right = createNode(8);
-
-	/* Output the data of the root node */
-	printf("Root Node: %d\n", root->data);
-	printf("Left Child: %d\n", root->left->data);
-	printf("Right Child: %d\n", root->right->data);
-
-	/* Free  allocated memory */
-	free(root->left);
-	free(root->right);
-	free(root);
-
-	return 0;
+	return (new_node);
 }
 
